@@ -22,7 +22,7 @@ import android.text.TextUtils;
 /**
  * 一行歌词实体
  */
-class LrcEntry implements Comparable<LrcEntry> {
+public class LrcEntry implements Comparable<LrcEntry> {
   public static final int GRAVITY_CENTER = 0;
   public static final int GRAVITY_LEFT = 1;
   public static final int GRAVITY_RIGHT = 2;
@@ -33,7 +33,7 @@ class LrcEntry implements Comparable<LrcEntry> {
   /** 歌词距离视图顶部的距离 */
   private float offset = Float.MIN_VALUE;
 
-  LrcEntry(long time, String text) {
+  public LrcEntry(long time, String text) {
     this.time = time;
     this.text = text;
   }

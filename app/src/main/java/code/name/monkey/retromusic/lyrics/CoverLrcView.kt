@@ -175,7 +175,7 @@ class CoverLrcView @JvmOverloads constructor(
     private fun init(attrs: AttributeSet?) {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.LrcView)
         mCurrentTextSize = ta.getDimension(
-            R.styleable.LrcView_lrcTextSize, resources.getDimension(R.dimen.lrc_text_size)
+            R.styleable.LrcView_lrcTextSize, resources.getDimension(R.dimen.lrc_cur_text_size)
         )
         mNormalTextSize = ta.getDimension(
             R.styleable.LrcView_lrcNormalTextSize,
@@ -294,7 +294,8 @@ class CoverLrcView @JvmOverloads constructor(
         runOnUi {
             reset()
             viewScope.launch(Dispatchers.IO) {
-                val lrcEntries = LrcUtils.parseLrc(arrayOf(lrcFile, null))
+                //val lrcEntries = LrcUtils.parseLrc(arrayOf(lrcFile, null))
+                val lrcEntries = LrcUtils.parseLrc(lrcFile)
                 withContext(Dispatchers.Main) {
                     onLrcLoaded(lrcEntries)
                 }

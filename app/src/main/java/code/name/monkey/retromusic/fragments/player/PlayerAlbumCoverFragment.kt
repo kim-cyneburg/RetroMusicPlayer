@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.animation.doOnEnd
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -276,16 +277,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private fun notifyColorChange(color: MediaNotificationProcessor) {
         callbacks?.onColorChanged(color)
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(
+        /*val primaryColor = MaterialValueHelper.getPrimaryTextColor(
             requireContext(),
             surfaceColor().isColorLight
         )
         val secondaryColor = MaterialValueHelper.getSecondaryDisabledTextColor(
             requireContext(),
             surfaceColor().isColorLight
-        )
+        )*/
+        val primaryColor = ContextCompat.getColor(requireContext()!!, R.color.lrc_cur_text_color);
+        val secondaryColor = ContextCompat.getColor(requireContext()!!, R.color.lrc_nor_text_color);
 
-        when (PreferenceUtil.nowPlayingScreen) {
+            when (PreferenceUtil.nowPlayingScreen) {
             Flat, Normal, Material -> if (PreferenceUtil.isAdaptiveColor) {
                 setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
             } else {

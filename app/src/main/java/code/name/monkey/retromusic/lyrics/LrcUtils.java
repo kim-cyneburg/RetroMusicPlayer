@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.lyrics;
 
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -34,8 +35,11 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import code.name.monkey.retromusic.lyrics.srt.SrtParser;
+
 /** 工具类 */
 class LrcUtils {
+  private static final String TAG = "LrcUtils";
   private static final Pattern PATTERN_LINE =
       Pattern.compile("((\\[\\d\\d:\\d\\d\\.\\d{2,3}\\])+)(.+)");
   private static final Pattern PATTERN_TIME =
@@ -65,9 +69,15 @@ class LrcUtils {
   }
 
   /** 从文件解析歌词 */
-  private static List<LrcEntry> parseLrc(File lrcFile) {
+  public static List<LrcEntry> parseLrc(File lrcFile) {
     if (lrcFile == null || !lrcFile.exists()) {
       return null;
+    }
+
+    String lrcPath = lrcFile.getPath();
+    Log.d(TAG, "parseLrc, lrcPath:"+lrcPath);
+    if(lrcPath != null && lrcPath.endsWith(".srt")) {
+        return SrtParser.parseSrt(lrcPath);
     }
 
     List<LrcEntry> entryList = new ArrayList<>();

@@ -6,6 +6,6 @@
     <color name="lrc_timeline_color">#809E9E9E</color>
     <color name="lrc_time_text_color">#809E9E9E</color>
 
-    <color name="lrc_cur_text_color" tools:ignore="MissingDefaultResource">#de000000</color>
-    <color name="lrc_nor_text_color" tools:ignore="MissingDefaultResource">#8a000000</color>
+    <color name="lrc_cur_text_color" tools:ignore="MissingDefaultResource">#ffff00</color>
+    <color name="lrc_nor_text_color" tools:ignore="MissingDefaultResource">#ffffff</color>
 </resources>

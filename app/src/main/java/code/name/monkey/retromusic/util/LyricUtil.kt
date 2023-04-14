@@ -95,6 +95,11 @@ object LyricUtil {
         return file.exists()
     }
 
+    private fun isLrcSrtFileExist(path: String): Boolean {
+        val file = File(getLrcSrtPath(path))
+        return file.exists()
+    }
+
     private fun getLocalLyricFile(title: String, artist: String): File? {
         val file = File(getLrcPath(title, artist))
         return if (file.exists()) {
@@ -113,12 +118,25 @@ object LyricUtil {
         }
     }
 
+    private fun getLocalLyricSrtFile(path: String): File? {
+        val file = File(getLrcSrtPath(path))
+        return if (file.exists()) {
+            file
+        } else {
+            null
+        }
+    }
+
     private fun getLrcPath(title: String, artist: String): String {
         return "$lrcRootPath$title - $artist.lrc"
     }
 
     private fun getLrcOriginalPath(filePath: String): String {
         return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1), "lrc")
+    }
+
+    private fun getLrcSrtPath(filePath: String): String {
+        return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1), "srt")
     }
 
     @Throws(Exception::class)
@@ -149,6 +167,9 @@ object LyricUtil {
         return when {
             isLrcOriginalFileExist(song.data) -> {
                 getLocalLyricOriginalFile(song.data)
+            }
+            isLrcSrtFileExist(song.data) -> {
+                getLocalLyricSrtFile(song.data)
             }
             isLrcFileExist(song.title, song.artistName) -> {
                 getLocalLyricFile(song.title, song.artistName)
